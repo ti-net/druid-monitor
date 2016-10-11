@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+
+	<!-- 配置 Druid监控页面 -->
+	<servlet>
+		<servlet-name>DruidStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+		<init-param>  
+            <param-name>jmxUrls</param-name>  
+            <param-value>biz1|service:jmx:rmi:///jndi/rmi://localhost:30001/jmxrmi,biz2|service:jmx:rmi:///jndi/rmi://aaaaa:30001/jmxrmi</param-value>  
+        </init-param>
+    	<!-- 允许清空统计数据 -->
+		<init-param>
+			<param-name>resetEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+    	<!-- 用户名 -->
+		<init-param>
+			<param-name>loginUsername</param-name>
+			<param-value>druid</param-value>
+		</init-param>
+    	<!-- 密码 -->
+		<init-param>
+			<param-name>loginPassword</param-name>
+			<param-value>druid</param-value>
+		</init-param>
+    	<!-- 限制只能内网访问 -->
+		<init-param>
+			<param-name>allow</param-name>
+			<param-value>127.0.0.1</param-value>
+		</init-param> 
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DruidStatView</servlet-name>
+		<url-pattern>/druid/*</url-pattern>
+	</servlet-mapping> 
+	
+</web-app>
